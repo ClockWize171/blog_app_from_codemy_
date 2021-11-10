@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+
+Home Page
+
+{% endblock head_title %}
+
+
+
+{% block content %}
+
+
+<h1>Posts</h1>
+{% for post in object_list %}
+    <h5>
+        <a href="{% url 'article_detail' post.pk %}">
+            {{post.title}}
+        </a> 
+         : <a href="{% url 'category' post.category|slugify %}">
+            {{post.category}}
+        </a>
+         - {{post.author.first_name}} {{post.author.last_name}}
+    </h5>
+    <p>{{ post.body | linebreaks | truncatewords:100 }}</p>
+    <!-- <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{post.title}}</h5>
+          <p class="card-text">{{ post.body | linebreaks | truncatewords:100 }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Category :</strong> {{post.category}}</li>
+          <li class="list-group-item"><strong>Author :</strong> {{post.author.first_name}} {{post.author.last_name}}</li>
+      </div> -->
+{% endfor %}
+
+{% endblock content %}
